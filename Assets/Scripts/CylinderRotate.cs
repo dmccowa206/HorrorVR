@@ -1,16 +1,29 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CylinderRotate : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] bool isLocked = true;
+    [SerializeField] Transform lockPanel;
+    Vector3 rot, deltaRot;
+    public void Unlock()
     {
-        
+        isLocked = false;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        rot = gameObject.transform.localEulerAngles;
+    }
+    private void Update()
+    {
+        if (!isLocked)
+        {
+            deltaRot = gameObject.transform.localEulerAngles - rot;
+            if (lockPanel !=null)
+            {
+                lockPanel.Rotate(deltaRot);
+            }
+            rot = gameObject.transform.localEulerAngles;            
+        }
     }
 }
