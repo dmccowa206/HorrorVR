@@ -6,11 +6,11 @@ public class DoorInteractable : SimpleHingeInteractable
     public UnityEvent OnOpen; 
     [SerializeField] Transform doorObject;
     [SerializeField] Vector3 rotationLimits;
-    [SerializeField] Collider closedCollider;
-    private bool isClosed;
-    private Vector3 startRotation;
+    public bool isOpen;
+    public bool isClosed;
     [SerializeField] Collider openCollider;
-    private bool isOpen;
+    [SerializeField] Collider closedCollider;
+    private Vector3 startRotation;
     [SerializeField] Vector3 endRotation;
     private float startAngleX;
     protected override void Start()
@@ -33,6 +33,7 @@ public class DoorInteractable : SimpleHingeInteractable
         }
         if (isSelected)
         {
+            Debug.Log("Selected");
             CheckLimits();
         }
     }
@@ -60,11 +61,13 @@ public class DoorInteractable : SimpleHingeInteractable
     {
         if(other == closedCollider)
         {
+            Debug.Log("Closed");
             isClosed = true;
             ReleaseHinge();
         }
         else if(other == openCollider)
         {
+            Debug.Log("Open");
             isOpen = true;
             ReleaseHinge();
         }
@@ -84,6 +87,7 @@ public class DoorInteractable : SimpleHingeInteractable
         float localAngleX = GetAngle(transform.localEulerAngles.x);
         if (localAngleX >= startAngleX + rotationLimits.x || localAngleX <= startAngleX - rotationLimits.x)
         {
+            Debug.Log("Check Limits Released: local: " + localAngleX + " start: " + startAngleX + " limit: " + rotationLimits.x);
             ReleaseHinge();
         }
     }

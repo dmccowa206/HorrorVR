@@ -13,8 +13,9 @@ public abstract class SimpleHingeInteractable : XRSimpleInteractable
     private Collider hingeCollider;
     private Vector3 hingePositions;
     [SerializeField] bool isLocked;
-    [SerializeField] AudioClip hingeMoveClip;
+    [SerializeField] AudioClip hingeMoveClip, closedClip;
     public AudioClip GetHingeMoveClip => hingeMoveClip;
+    public AudioClip GetClosedClip => closedClip;
     private const string Default_Layer = "Default";
     private const string Grab_Layer = "Grab";
     protected abstract void ResetHinge();
@@ -33,6 +34,7 @@ public abstract class SimpleHingeInteractable : XRSimpleInteractable
     {
         if (!isLocked)
         {
+            Debug.Log("OnSelectEntered: SimpleHinge");
             base.OnSelectEntered(args);
             grabHand = args.interactorObject.transform;
             OnHingeSelected?.Invoke(this);
@@ -49,7 +51,7 @@ public abstract class SimpleHingeInteractable : XRSimpleInteractable
     {
         transform.LookAt(grabHand, transform.forward);
         hingePositions = hingeCollider.bounds.center;
-        
+        Debug.Log(grabHand.position);
         if (grabHand.position.x >= hingePositions.x + positionLimits.x ||
                 grabHand.position.x <= hingePositions.x - positionLimits.x)
         {
