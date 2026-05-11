@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
         SetKeystones();
         SetSockets();
         SetRocks();
-        SetTumblers();
+        // SetTumblers();
     }
     private void OnDisable()
     {
@@ -106,18 +106,18 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    private void SetTumblers()
-    {
-        if (tumblers != null)
-        {
-            for (int i = 0; i < tumblers.Length; i++)
-            {
-                tumblerSource.Append(tumblers[i].AddComponent<AudioSource>());
-                tumblers[i].selectEntered.AddListener(OnSelectEnteredTumb);
-                tumblers[i].selectExited.AddListener(OnSelectExitedTumb);
-            }
-        }
-    }
+    // private void SetTumblers()
+    // {
+    //     if (tumblers != null)
+    //     {
+    //         for (int i = 0; i < tumblers.Length; i++)
+    //         {
+    //             tumblerSource.Append(tumblers[i].AddComponent<AudioSource>());
+    //             tumblers[i].selectEntered.AddListener(OnSelectEnteredTumb);
+    //             tumblers[i].selectExited.AddListener(OnSelectExitedTumb);
+    //         }
+    //     }
+    // }
     private void PlayHeadlightGet(SelectEnterEventArgs arg0)
     {
         if(headlightGet != null)
