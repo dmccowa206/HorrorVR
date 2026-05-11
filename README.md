@@ -43,5 +43,5 @@ from ambientcg.com
 ## Video Demo & Portfolio
 [https://sites.google.com/view/dmccowanportfolio/home]
 
-##Known Issues
+## Known Issues
 - Teleporting in the maze can result in clipping out of bounds
